@@ -3,10 +3,11 @@ import java.nio.file.Paths;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(isPalindrom("lagerregal"));
-        System.out.println(isPrim(toLong("13")));
+        printAllSevenPrimePalindroms("pi.txt");
+
     }
-public static long toLong(String s){return Long.parseLong(s);}
+
+    public static long toLong(String s){return Long.parseLong(s);}
 
     public static String readFile(String fileName) {
         try {
@@ -20,15 +21,11 @@ public static long toLong(String s){return Long.parseLong(s);}
     }
 
     public static boolean isPalindrom(String s) {
-        String reverse = "";
+        StringBuilder reverse = new StringBuilder();
         for (int i = s.length() - 1; i >= 0; i--) {
-            reverse += s.charAt(i);
+            reverse.append(s.charAt(i));
         }
-        if (reverse.equals(s)) {
-            return true;
-        } else {
-            return false;
-        }
+        return reverse.toString().equals(s);
     }
 
     public static boolean isPrim(long n) {
@@ -36,10 +33,21 @@ public static long toLong(String s){return Long.parseLong(s);}
             if (n % i == 0) {
                 return false;
             }
-
         }
         return true;
     }
 
+    public static void printAllSevenPrimePalindroms(String fileName){
+        String s = readFile(fileName);
+        String possiblePalindrom;
+        for (int i = 0; i < s.length()-7; i++) {
+            possiblePalindrom=s.substring(i,i+7);
+            if(isPalindrom(possiblePalindrom)){
+                if (isPrim(toLong(possiblePalindrom))){
+                    System.out.println(possiblePalindrom+"  "+(i-1));
+                }
+            }
+        }
+    }
 
 }
