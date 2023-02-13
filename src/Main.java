@@ -3,7 +3,7 @@ import java.nio.file.Paths;
 
 public class Main {
     public static void main(String[] args) {
-        printAllSevenPrimePalindroms("pi.txt");
+        printAllSevenPrimePalindroms("pi.txt",9);
 
     }
 
@@ -37,14 +37,16 @@ public class Main {
         return true;
     }
 
-    public static void printAllSevenPrimePalindroms(String fileName){
+    public static void printAllSevenPrimePalindroms(String fileName, int length){
         String s = readFile(fileName);
         String possiblePalindrom;
-        for (int i = 0; i < s.length()-7; i++) {
-            possiblePalindrom=s.substring(i,i+7);
+        int counter = 0;
+        for (int i = 0; i < s.length()-length; i++) {
+            possiblePalindrom=s.substring(i,i+length);
             if(isPalindrom(possiblePalindrom)){
                 if (isPrim(toLong(possiblePalindrom))){
-                    System.out.println(possiblePalindrom+"  "+(i-1));
+                    counter++;
+                    System.out.println(counter + ".) Nachkomma-Stelle: "+(i-1)+",  Prim-Palindrom:  "+possiblePalindrom);
                 }
             }
         }
